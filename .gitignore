@@ -1,3 +1,54 @@
 prd.txt
-.venv/
+# --- Blockchain (Foundry/Hardhat) ---
+# Ignore compiled artifacts and cache
+blockchain/out/
+blockchain/cache/
+# Ignore local state if you use the --state flag
+anvil_state.json
+# Ignore broadcast logs (transaction history)
+blockchain/broadcast/
+
+# --- Machine Learning (PyTorch) ---
+# NEVER commit model weights (they are too large for Git)
+*.pth
+*.onnx
+*.weights
+*.bin
+*.h5
+# Ignore the actual medical images
+data/
+# But allow the folder structure if you have an empty folder
+!data/.gitkeep
+
+# --- Python ---
 __pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.env
+.pytest_cache/
+
+# --- Frontend (Next.js) ---
+dashboard/node_modules/
+dashboard/.next/
+dashboard/out/
+dashboard/build/
+dashboard/.env.local
+dashboard/.env.development.local
+dashboard/.env.test.local
+dashboard/.env.production.local
+
+# --- Docker & OS ---
+.docker/
+# If you use docker-compose to mount volumes
+docker_volumes/
+.DS_Store
+Thumbs.db
+
+# --- Project Specific ---
+# Ignore the startup script logs
+anvil.log
+# Ignore shared weight transfers
+shared_weights/
