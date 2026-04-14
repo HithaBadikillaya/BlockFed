@@ -1,0 +1,71 @@
+services:
+  coordinator:
+    build:
+      context: .
+      dockerfile: coordinator/Dockerfile
+    environment:
+      RPC_URL: ${RPC_URL:-http://host.docker.internal:8545}
+      CONTRACT_ADDRESS: ${CONTRACT_ADDRESS}
+      ABI_PATH: /workspace/blockchain/out/FLRegistry.sol/FLRegistry.json
+      COORDINATOR_PRIVATE_KEY: ${PRIVATE_KEY}
+      MAX_ROUNDS: ${MAX_ROUNDS:-1}
+      POLL_INTERVAL: ${POLL_INTERVAL:-2}
+    volumes:
+      - ./:/workspace
+    command: python /workspace/coordinator/aggregator.py
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  client1:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    environment:
+      RPC_URL: ${RPC_URL:-http://host.docker.internal:8545}
+      CONTRACT_ADDRESS: ${CONTRACT_ADDRESS}
+      ABI_PATH: /workspace/blockchain/out/FLRegistry.sol/FLRegistry.json
+      PRIVATE_KEY: ${CLIENT1_PRIVATE_KEY:-0x59c6995e998f97a5a0044966f0945380c5f2c9be2b6c3e76f4d5f6f08d6f44f0}
+      CLIENT_NAME: client1
+      MAX_ROUNDS: ${MAX_ROUNDS:-1}
+      POLL_INTERVAL: ${POLL_INTERVAL:-2}
+    volumes:
+      - ./:/workspace
+    command: python /workspace/client/client.py
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  client2:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    environment:
+      RPC_URL: ${RPC_URL:-http://host.docker.internal:8545}
+      CONTRACT_ADDRESS: ${CONTRACT_ADDRESS}
+      ABI_PATH: /workspace/blockchain/out/FLRegistry.sol/FLRegistry.json
+      PRIVATE_KEY: ${CLIENT2_PRIVATE_KEY:-0x5de4111afa1a4b94908d8131c7dce0eb9f6c2d7b86d09f70f9137bac9c0ed912}
+      CLIENT_NAME: client2
+      MAX_ROUNDS: ${MAX_ROUNDS:-1}
+      POLL_INTERVAL: ${POLL_INTERVAL:-2}
+    volumes:
+      - ./:/workspace
+    command: python /workspace/client/client.py
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  client3:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    environment:
+      RPC_URL: ${RPC_URL:-http://host.docker.internal:8545}
+      CONTRACT_ADDRESS: ${CONTRACT_ADDRESS}
+      ABI_PATH: /workspace/blockchain/out/FLRegistry.sol/FLRegistry.json
+      PRIVATE_KEY: ${CLIENT3_PRIVATE_KEY:-0x7c852118294c4b4f6d46fdc5f87c3f0e6d4f5a58b9b8f9a84a73c5d1c8e52c61}
+      CLIENT_NAME: client3
+      MAX_ROUNDS: ${MAX_ROUNDS:-1}
+      POLL_INTERVAL: ${POLL_INTERVAL:-2}
+    volumes:
+      - ./:/workspace
+    command: python /workspace/client/client.py
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
